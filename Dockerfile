@@ -1,5 +1,4 @@
-# Use a lightweight base image
-FROM alpine:latest
+FROM alpine:3.18.4
 
 ARG MYSQL_HOST="localhost"
 ARG MYSQL_PORT="3306"
@@ -14,7 +13,7 @@ ARG REPORT_INTERVAL="2"
 ARG THREADS="2"
 
 # Install MySQL client tools
-RUN apk --no-cache add mysql-client nmap-ncat sysbench bash
+RUN apk --no-cache add mysql-client=10.11.5-r0 nmap-ncat=7.93-r1 sysbench=1.0.20-r1 bash=5.2.15-r5
 
 # Set the default shell to bash
 SHELL ["/bin/bash", "-c"]
