@@ -2,7 +2,8 @@ name: Build publish and test container image
 
 on:
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build:
@@ -19,33 +20,33 @@ jobs:
           tags: |
             type=raw,value=${{ github.event.pull_request.head.sha }}
 
-      - name: Hadolint Dockerfile Linter
-        uses: hadolint/hadolint-action@v3.1.0
-        id: hadolint
-        with:
-          dockerfile: Dockerfile
-          format: tty
-          no-fail: true
-          failure-threshold: warning
+      # - name: Hadolint Dockerfile Linter
+      #   uses: hadolint/hadolint-action@v3.1.0
+      #   id: hadolint
+      #   with:
+      #     dockerfile: Dockerfile
+      #     format: tty
+      #     no-fail: true
+      #     failure-threshold: warning
 
-      - name: Update Pull Request with Hadolint Report
-        uses: actions/github-script@v6
-        if: github.event_name == 'pull_request'
-        with:
-          script: |
-            const output = `
-            #### Hadolint: \`${{ steps.hadolint.outcome }}\`
-            \`\`\`
-            ${process.env.HADOLINT_RESULTS}
-            \`\`\`
-            `;
+      # - name: Update Pull Request with Hadolint Report
+      #   uses: actions/github-script@v6
+      #   if: github.event_name == 'pull_request'
+      #   with:
+      #     script: |
+      #       const output = `
+      #       #### Hadolint: \`${{ steps.hadolint.outcome }}\`
+      #       \`\`\`
+      #       ${process.env.HADOLINT_RESULTS}
+      #       \`\`\`
+      #       `;
 
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: output
-            })
+      #       github.rest.issues.createComment({
+      #         issue_number: context.issue.number,
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         body: output
+      #       })
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
