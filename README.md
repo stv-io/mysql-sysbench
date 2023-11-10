@@ -2,7 +2,7 @@
 
 ```console
 docker run \
-  -e MYSQL_HOST="host.docker.internal" \
+  -e MYSQL_HOST="172.17.0.2" \
   -e MYSQL_USER="root" \
   -e MYSQL_PASSWORD="Password123" \
   -e MYSQL_DB="some_db" \
@@ -11,7 +11,8 @@ docker run \
   -e REPORT_INTERVAL="10" \
   -e THREADS="64" \
   -e SCRIPT_NAME="bulk_insert.lua" \
-  mysql-sysbench:local  
+  ghcr.io/stv-io/mysql-sysbench:6a4547fc9cfafb9440cb8cc8ad172b895383b345 \
+  prepare run cleanup
 ```
 
 ```text
