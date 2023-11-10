@@ -6,13 +6,13 @@ docker run \
   -e MYSQL_USER="root" \
   -e MYSQL_PASSWORD="Password123" \
   -e MYSQL_DB="some_db" \
-  -e EVENTS="1000000" \
-  -e TIME="30" \
+  -e EVENTS="10000000" \
+  -e TIME="300" \
   -e REPORT_INTERVAL="10" \
   -e THREADS="64" \
-  -e SCRIPT_NAME="bulk_insert.lua" \
-  ghcr.io/stv-io/mysql-sysbench:6a4547fc9cfafb9440cb8cc8ad172b895383b345 \
-  prepare run cleanup
+  -e SCRIPT_NAME="oltp_update_index.lua" \
+  ghcr.io/stv-io/mysql-sysbench:0e21ba9b6a98fb625d39dde6688d5ebd2c11da3e \
+  prepare run
 ```
 
 ```text
